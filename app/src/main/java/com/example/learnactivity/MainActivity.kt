@@ -1,29 +1,26 @@
 package com.example.learnactivity
 
+import android.Manifest
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
-import kotlin.random.Random
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 
 
-class MainActivity : AppCompatActivity() {
-    private lateinit var tvState :TextView
+class MainActivity : BaseActivity(1) {
     override fun onCreate(savedInstanceState: Bundle?) {
-        Log.e("onCreate", this.taskId.toString());
-        if(!this::tvState.isInitialized){
-            println("notInitialized")
-        }
+        Log.e("state1", "onCreate")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         if (savedInstanceState?.getString("message") != null) {
             val message = savedInstanceState.getString("message")
             Toast.makeText(this, message, Toast.LENGTH_LONG).show()
         }
-        tvState = findViewById(R.id.tv_state)
         val btnGoto2: Button = findViewById(R.id.btn_goto2)
         btnGoto2.setOnClickListener {
             // Code here executes on main thread after user presses button
@@ -36,55 +33,24 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
-    }
 
-
-    override fun onStart() {
-
-        if(this::tvState.isInitialized){
-            println("initialized")
+        findViewById<Button>(R.id.btn_implicit_intent).setOnClickListener {
+            val intent = Intent(Intent.ACTION_CALL).setData(Uri.parse("tel:" + "0393072748"))
+            if (ContextCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.CALL_PHONE
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                val REQUEST_PHONE_CALL = 0
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(Manifest.permission.CALL_PHONE), REQUEST_PHONE_CALL
+                );
+            }
+            if (intent.resolveActivity(packageManager) != null) {
+                startActivity(intent)
+            }
         }
-        super.onStart()
-        tvState.setText("started")
-        Log.e("onStart", this.taskId.toString());
     }
 
-    override fun onResume() {
-        super.onResume()
-        tvState.setText("resumed")
-        Log.e("onResume", "resumed");
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        Log.e("onSaveInstanceState", "start");
-        val random: Int = Random(System.nanoTime()).nextInt(11)
-        outState.putString("message", random.toString());
-        super.onSaveInstanceState(outState)
-    }
-
-    override fun onPause() {
-        tvState.setText("will pause")
-        super.onPause()
-        tvState.setText("paused")
-        Log.e("onPause", "paused");
-    }
-
-    override fun onStop() {
-        tvState.setText("will stopped")
-        super.onStop()
-        tvState.setText("stopped")
-        Log.e("onStop", "stopped")
-    }
-
-    override fun onRestart() {
-        super.onRestart()
-        tvState.setText("restarted")
-        Log.e("onRestart", "restarted");
-    }
-
-    override fun onDestroy() {
-        tvState.setText("will destroy")
-        super.onDestroy()
-        Log.e("onDestroy", "will destroy");
-    }
 }
