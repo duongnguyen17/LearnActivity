@@ -1,24 +1,29 @@
 package com.example.learnactivity
 
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import kotlin.random.Random
 
-abstract class BaseActivity(private val orderScreen: Int) : AppCompatActivity() {
+abstract class BaseActivity(private val name: String) : AppCompatActivity() {
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Log.e("state - " + name, "onCreate in task " + this.taskId.toString());
+    }
     override fun onStart() {
         super.onStart()
-        Log.e("state" + orderScreen, "start " + this.taskId.toString());
+        Log.e("state - " + name, "start ");
     }
 
     override fun onResume() {
         super.onResume()
-        Log.e("state1", "resumed");
+        Log.e("state - " + name, "resumed");
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        Log.e("onSaveInstanceState" + orderScreen, "start");
+        Log.e("onSaveInstanceState - " + name, "start");
         val random: Int = Random(System.nanoTime()).nextInt(11)
         outState.putString("message", random.toString());
         super.onSaveInstanceState(outState)
@@ -26,21 +31,21 @@ abstract class BaseActivity(private val orderScreen: Int) : AppCompatActivity() 
 
     override fun onPause() {
         super.onPause()
-        Log.e("state" + orderScreen, "paused");
+        Log.e("state - " + name, "paused");
     }
 
     override fun onStop() {
         super.onStop()
-        Log.e("state" + orderScreen, "stopped")
+        Log.e("state - " + name, "stopped")
     }
 
     override fun onRestart() {
         super.onRestart()
-        Log.e("state" + orderScreen, "restarted");
+        Log.e("state - " + name, "restarted");
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        Log.e("state" + orderScreen, "will destroy");
+        Log.e("state - " + name, "will destroy");
     }
 }

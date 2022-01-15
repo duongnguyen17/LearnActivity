@@ -1,6 +1,7 @@
 package com.example.learnactivity
 
 import android.Manifest
+import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -8,13 +9,13 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 
 
-class MainActivity : BaseActivity(1) {
+class MainActivity : BaseActivity("screen1") {
     override fun onCreate(savedInstanceState: Bundle?) {
-        Log.e("state1", "onCreate")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         if (savedInstanceState?.getString("message") != null) {
@@ -51,6 +52,21 @@ class MainActivity : BaseActivity(1) {
                 startActivity(intent)
             }
         }
+        // start activity custom for result
+        val getResult =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == Activity.RESULT_OK) {
+                    Toast.makeText(this, result.data?.getStringExtra("message"), Toast.LENGTH_SHORT).show()
+                }
+            }
+        findViewById<Button>(R.id.btnGoForResult).setOnClickListener {
+            getResult.launch(Intent(this, ActivityForResult::class.java))
+        }
+        // start activity available for result
+        findViewById<Button>(R.id.btnTakePhoto).setOnClickListener {
+
+        }
     }
+
 
 }

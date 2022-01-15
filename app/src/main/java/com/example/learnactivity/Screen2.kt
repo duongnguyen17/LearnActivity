@@ -6,9 +6,8 @@ import android.util.Log
 import android.widget.TextView
 import android.widget.Button
 
-class Screen2 : BaseActivity(2) {
+class Screen2 : BaseActivity("screen2") {
     override fun onCreate(savedInstanceState: Bundle?) {
-        Log.e("state2", "onCreate")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_screen2)
         val receiveData: String = intent.getIntExtra("message", 10).toString()
