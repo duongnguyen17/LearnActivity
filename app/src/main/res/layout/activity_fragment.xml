@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FragmentActivity">
+
+    <fragment
+        android:id="@+id/frm_static1"
+        class="com.example.learnactivity.StaticFragment1"
+        android:layout_width="219dp"
+        android:layout_height="733dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:layout="@layout/fragment_static1"
+        tools:layout_editor_absoluteY="-1dp" />
+
+    <fragment
+        android:id="@+id/frm_static2"
+        class="com.example.learnactivity.StaticFragment2"
+        android:layout_width="190dp"
+        android:layout_height="696dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:layout="@layout/fragment_static2"
+        tools:layout_editor_absoluteY="-1dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

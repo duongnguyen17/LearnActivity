@@ -22,18 +22,18 @@ class MainActivity : BaseActivity("screen1") {
             val message = savedInstanceState.getString("message")
             Toast.makeText(this, message, Toast.LENGTH_LONG).show()
         }
-        val btnGoto2: Button = findViewById(R.id.btn_goto2)
-        btnGoto2.setOnClickListener {
-            // Code here executes on main thread after user presses button
-            val intent = Intent(this, Screen2::class.java)
-            intent.putExtra("message", 15)
-            startActivity(intent)
-        }
-        val btnGoto1: Button = findViewById(R.id.btn_goto1)
-        btnGoto1.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        }
+//        val btnGoto2: Button = findViewById(R.id.btn_goto2)
+//        btnGoto2.setOnClickListener {
+//            // Code here executes on main thread after user presses button
+//            val intent = Intent(this, Screen2::class.java)
+//            intent.putExtra("message", 15)
+//            startActivity(intent)
+//        }
+//        val btnGoto1: Button = findViewById(R.id.btn_goto1)
+//        btnGoto1.setOnClickListener {
+//            val intent = Intent(this, MainActivity::class.java)
+//            startActivity(intent)
+//        }
 
         findViewById<Button>(R.id.btn_implicit_intent).setOnClickListener {
             val intent = Intent(Intent.ACTION_CALL).setData(Uri.parse("tel:" + "0393072748"))
@@ -56,7 +56,8 @@ class MainActivity : BaseActivity("screen1") {
         val getResult =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == Activity.RESULT_OK) {
-                    Toast.makeText(this, result.data?.getStringExtra("message"), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, result.data?.getStringExtra("message"), Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
         findViewById<Button>(R.id.btnGoForResult).setOnClickListener {
@@ -66,7 +67,10 @@ class MainActivity : BaseActivity("screen1") {
         findViewById<Button>(R.id.btnTakePhoto).setOnClickListener {
 
         }
+        //start fragment activity
+        findViewById<Button>(R.id.btn_gotoFragmentScreen).setOnClickListener {
+            val intent = Intent(this, FragmentActivity::class.java)
+            startActivity(intent)
+        }
     }
-
-
 }
