@@ -34,7 +34,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.125"
         tools:ignore="MissingConstraints" />
 
     <!--    <Button-->
@@ -92,7 +91,7 @@
         android:id="@+id/btnTakePhoto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="take photo"
+        android:text="thread"
         app:layout_constraintBottom_toTopOf="@+id/btn_implicit_intent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

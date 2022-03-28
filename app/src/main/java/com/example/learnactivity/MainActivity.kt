@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.example.learnactivity.thread.LearnThreadActivity
 
 
 class MainActivity : BaseActivity("screen1") {
@@ -65,7 +66,8 @@ class MainActivity : BaseActivity("screen1") {
         }
         // start activity available for result
         findViewById<Button>(R.id.btnTakePhoto).setOnClickListener {
-
+            val intent = Intent(this, LearnThreadActivity::class.java)
+            startActivity((intent))
         }
         //start fragment activity
         findViewById<Button>(R.id.btn_gotoFragmentScreen).setOnClickListener {

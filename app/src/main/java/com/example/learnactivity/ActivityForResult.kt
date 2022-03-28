@@ -14,5 +14,4 @@ class ActivityForResult : BaseActivity("asctivityForResult") {
             finish()
         }
     }
-
 }
